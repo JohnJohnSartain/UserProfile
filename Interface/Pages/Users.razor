@@ -1,0 +1,15 @@
+﻿@page "/Users"
+
+@using Interface.Components.Users
+@using Interface.Entities
+@using Microsoft.AspNetCore.Components.Authorization
+@using MudBlazor
+
+<AuthorizeView Roles="@Role.Administrator">
+    <Authorized>
+        <UsersTable />
+    </Authorized>
+    <NotAuthorized>
+        You are not authorized to view this page
+    </NotAuthorized>
+</AuthorizeView>

@@ -1,0 +1,16 @@
+﻿@page "/"
+@using Blazored.LocalStorage
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@using Interface.Components.Users
+@using MudBlazor
+
+<AuthorizeView>
+    <Authorized>
+        <User></User>
+    </Authorized>
+    <NotAuthorized>
+        You are not authorized to view this page
+    </NotAuthorized>
+</AuthorizeView>

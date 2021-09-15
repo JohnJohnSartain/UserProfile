@@ -1,0 +1,34 @@
+﻿@using Interface.Models
+@using MudBlazor
+
+<MudTable Items="@UserModels" Hover="true" SortLabel="Sort By">
+    <HeaderContent>
+        <MudTh><MudTableSortLabel Enabled=false SortBy="new Func<UserModel, object>(x=>x.ProfilePhoto)">Photo</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<UserModel, object>(x=>x.Id)">ID</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<UserModel, object>(x=>x.Username)">Username</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<UserModel, object>(x=>x.Email)">Email</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<UserModel, object>(x=>x.FirstName)">First</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<UserModel, object>(x=>x.Lastname)">Last</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<UserModel, object>(x=>x.Roles)">Roles</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<UserModel, object>(x=>x.Created)">Created</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<UserModel, object>(x=>x.AuthenticationHistory)">Last Online</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<UserModel, object>(x=>x.SitesUsed)">Last App Used</MudTableSortLabel></MudTh>
+        <MudTh><NewUserButton /></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Photo"><img src=@context.ProfilePhoto style="width: 50px; height: 50px;" /></MudTd>
+        <MudTd DataLabel="ID">@context.Id</MudTd>
+        <MudTd DataLabel="Username">@context.Username</MudTd>
+        <MudTd DataLabel="Email">@context.Email</MudTd>
+        <MudTd DataLabel="First">@context.FirstName</MudTd>
+        <MudTd DataLabel="Last">@context.Lastname</MudTd>
+        <MudTd DataLabel="Roles">@string.Join(", ", context.Roles)</MudTd>
+        <MudTd DataLabel="Created">@context.Created</MudTd>
+        <MudTd DataLabel="Created">@GetLastLogin(context.AuthenticationHistory)</MudTd>
+        <MudTd DataLabel="Created">@context.SitesUsed</MudTd>
+        <MudTd><DeleteUser UserId="@context.Id" /></MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+    </PagerContent>
+</MudTable>

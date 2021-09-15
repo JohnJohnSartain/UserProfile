@@ -1,0 +1,12 @@
+﻿@page "/User"
+
+@using Microsoft.AspNetCore.Components.Authorization
+
+<AuthorizeView>
+    <Authorized>
+        <Interface.Components.User.Profile></Interface.Components.User.Profile>
+    </Authorized>
+    <NotAuthorized>
+        You are not authorized to view this page
+    </NotAuthorized>
+</AuthorizeView>

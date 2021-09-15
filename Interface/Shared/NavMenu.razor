@@ -1,0 +1,13 @@
+﻿@using Blazored.LocalStorage
+@using Interface.Entities
+@using Microsoft.AspNetCore.Components.Authorization
+@using MudBlazor
+
+<MudNavMenu>
+    <MudNavLink Href="/">Home</MudNavLink>
+    <AuthorizeView Roles="@Role.Administrator">
+        <MudNavLink Href="/Users">Users</MudNavLink>
+    </AuthorizeView>
+    <MudNavLink Href="https://sartainstudios.com">About</MudNavLink>
+    <button @onclick="Logout" style="width: 100%; height: 100%;"><MudNavLink Href="/login">Logout</MudNavLink></button>
+</MudNavMenu>

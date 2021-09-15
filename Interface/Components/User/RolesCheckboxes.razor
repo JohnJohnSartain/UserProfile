@@ -1,0 +1,7 @@
+﻿@using Interface.Entities
+@using MudBlazor
+
+<MudCheckBox Disabled="true" @bind-Checked="@IsGodAccount">@nameof(Role.God)</MudCheckBox>
+<MudCheckBox Disabled="true" @bind-Checked="@IsServiceAccount">@nameof(Role.Service)</MudCheckBox>
+<MudCheckBox Disabled="true" @bind-Checked="@IsAdministratorAccount">@nameof(Role.Administrator)</MudCheckBox>
+<MudCheckBox Disabled="true" @bind-Checked="@IsUserAccount">@nameof(Role.User)</MudCheckBox>

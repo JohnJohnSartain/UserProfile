@@ -1,0 +1,33 @@
+﻿@using MudBlazor
+
+<EditForm Model="@userModel" OnValidSubmit="OnValidSubmit">
+    <MudDialog>
+        <DialogContent>
+            <MudTextField Label="First name" HelperText="Min. 3 characters" @bind-Value="userModel.Username" For="@(() => userModel.Username)" />
+            <MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3" @bind-Value="userModel.Password" For="@(() => userModel.Password)" InputType="InputType.Password" />
+
+            @if (success.HasValue && success.Value)
+            {
+                <MudText Color="Color.Success">Success</MudText>
+            }
+            else
+            {
+                <MudText Color="@Color.Error">
+                    <ValidationSummary />
+                    @{
+                        if (errorList != null && errorList.Count() == 0)
+                            foreach (var error in errorList)
+                            {
+                                <span>Name: error.Name</span>
+                                <span>Reason: error.Reason </span>
+                            }
+                    }
+                </MudText>
+            }
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">Cancel</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary">Create</MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>

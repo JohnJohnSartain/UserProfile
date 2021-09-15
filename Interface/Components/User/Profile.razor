@@ -1,0 +1,59 @@
+﻿@using MudBlazor
+@using Microsoft.AspNetCore.Components.Authorization
+
+<EditForm Model="@userModel" OnValidSubmit="OnValidSubmit">
+    <MudContainer MaxWidth="MaxWidth.Small">
+        <MudCard>
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem xs="12">
+                        <img src="@userModel.ProfilePhoto" style="width: 50px; height: 50px;display: block; margin-left: auto; margin-right: auto;" />
+                        <br />
+                        <MudTextField Label="Photo" HelperText="Url to profile" @bind-Value="userModel.ProfilePhoto" For="@(() => userModel.ProfilePhoto)" Class="d-flex align-center justify-center mud-width-full" Variant="Variant.Outlined" />
+                    </MudItem>
+                    <MudItem md="6"><MudTextField Label="Username" HelperText="Min. 3 characters" @bind-Value="userModel.Username" For="@(() => userModel.Username)" Variant="Variant.Outlined" /></MudItem>
+                    <MudItem md="6"><MudTextField Label="Email" HelperText="Valid email only" @bind-Value="userModel.Email" For="@(() => userModel.Email)" Variant="Variant.Outlined" /></MudItem>
+                    <MudItem md="6"><MudTextField Label="First Name" @bind-Value="userModel.FirstName" For="@(() => userModel.FirstName)" Variant="Variant.Outlined" /></MudItem>
+                    <MudItem md="6"><MudTextField Label="Last Name" @bind-Value="userModel.Lastname" For="@(() => userModel.Lastname)" Variant="Variant.Outlined" /></MudItem>
+                    <MudItem md="6"><MudTextField Label="Account Created" @bind-Value="userModel.Created" For="@(() => userModel.Created)" Variant="Variant.Outlined" ReadOnly=true /></MudItem>
+                    <MudItem md="6">
+                        <MudSelect T="string" Label="Login History" Variant="Variant.Outlined">
+                            @if (userModel.AuthenticationHistory != null)
+                            {
+                                @foreach (var item in userModel.AuthenticationHistory.Reverse().Take(50))
+                                {
+                                    <MudSelectItem Value="@item.ToLocalTime().ToString()" />
+                                }
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem md="12"><RolesCheckboxes UsersRoles="@userModel.Roles" /></MudItem>
+                    <MudItem md="6"><MudButton @onclick="ShowChangeUserPasswordDialogBox" Color="Color.Primary" Variant="Variant.Text" aria-label="create">Change Password</MudButton></MudItem>
+                </MudGrid>
+            </MudCardContent>
+            <MudCardActions>
+                @if (success.HasValue && success.Value)
+                {
+                   
+                }
+                else
+                {
+                    <MudText Color="@Color.Error">
+                        <ValidationSummary />
+                        @{
+                            if (errorList != null && errorList.Count() == 0)
+                                foreach (var error in errorList)
+                                {
+                                    <span>Name: error.Name</span>
+                                    <span>Reason: error.Reason </span>
+                                }
+                        }
+                    </MudText>
+                    <br />
+                }
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Update</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudContainer>
+</EditForm>
+
