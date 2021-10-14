@@ -4,7 +4,7 @@ namespace Interface.Models;
 
 public class UserModel
 {
-    public string Id { get; set; }
+    public string? Id { get; set; }
 
     [Required]
     [MinLength(3)]
@@ -17,23 +17,23 @@ public class UserModel
 
     [EmailAddress]
     [DataType(DataType.EmailAddress)]
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
     [MaxLength(30)]
-    public string FirstName { get; set; }
+    public string? FirstName { get; set; }
 
     [MaxLength(30)]
-    public string Lastname { get; set; }
+    public string? LastName { get; set; }
 
-    public string ProfilePhoto { get; set; }
+    public string? ProfilePhoto { get; set; }
 
-    public string[] Roles { get; set; }
-
-    [DataType(DataType.DateTime)]
-    public DateTime Created { get; set; }
+    public string[]? Roles { get; set; }
 
     [DataType(DataType.DateTime)]
-    public DateTime[] AuthenticationHistory { get; set; }
+    public DateTime? Created { get; set; }
 
-    public string[] SitesUsed { get; set; }
+    [DataType(DataType.DateTime)]
+    public DateTime[]? AuthenticationHistory { get; set; }
+
+    public string[]? ApplicationsUsed { get; set; }
 }

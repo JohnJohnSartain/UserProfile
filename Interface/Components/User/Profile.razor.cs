@@ -40,7 +40,7 @@ public partial class Profile
     private async Task<UserModel> GetUserModelAsync()
     {
         HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await GetToken());
-        return (await HttpClient.GetFromJsonAsync<AutoWrapperResponseModel<UserModel>>($"User/Self")).Result;
+        return (await HttpClient.GetFromJsonAsync<AutoWrapperResponseModel<UserModel>>("User/Self/Profile")).Result;
     }
 
     private async void OnValidSubmit(EditContext context)
