@@ -24,8 +24,8 @@
         <MudTd DataLabel="Last">@context.LastName</MudTd>
         <MudTd DataLabel="Roles">@string.Join(", ", context.Roles)</MudTd>
         <MudTd DataLabel="Created">@context.Created</MudTd>
-        <MudTd DataLabel="Created">@GetLastLogin(context.AuthenticationHistory)</MudTd>
-        <MudTd DataLabel="Created">@context.ApplicationsUsed</MudTd>
+        <MudTd DataLabel="Last Login">@GetLastLogin(context.AuthenticationHistory)</MudTd>
+        <MudTd DataLabel="Applications">@context.ApplicationsUsed</MudTd>
         <MudTd><DeleteUser UserId="@context.Id" /></MudTd>
     </RowTemplate>
     <PagerContent>
