@@ -44,7 +44,7 @@ public partial class ChangePasswordDialog
         if (result.ResponseException != null && result.ResponseException.ValidationErrors.Any())
             errorList = result.ResponseException.ValidationErrors.ToArray();
 
-        if (errorList.Any())
+        if (errorList != null && errorList.Any())
             foreach (var item in errorList)
                 DisplaySnackbar(item.Name + ": " + item.Reason, Severity.Error);
 
@@ -60,10 +60,18 @@ public partial class ChangePasswordDialog
 
     private async Task<AutoWrapperResponseModel<string>> ChangeUserPassword()
     {
-        HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await GetToken());
-        HttpResponseMessage response = await HttpClient.PatchAsync("User/Password", new StringContent(JsonConvert.SerializeObject(userModel), Encoding.UTF8, "application/json"));
-        var responseContent = await response.Content.ReadAsStringAsync();
-        return JsonConvert.DeserializeObject<AutoWrapperResponseModel<string>>(responseContent);
+        try
+        {
+            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await GetToken());
+            HttpResponseMessage response = await HttpClient.PatchAsync("User/Password", new StringContent(JsonConvert.SerializeObject(userModel), Encoding.UTF8, "application/json"));
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<AutoWrapperResponseModel<string>>(responseContent);
+        }
+        catch (Exception ex)
+        {
+            var x = ex;
+            throw new Exception("");
+        }
     }
 
     private void DisplaySnackbar(string message, Severity severity)
