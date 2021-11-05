@@ -35,7 +35,7 @@ public partial class Profile
         DialogService.Show<ChangePasswordDialog>("Change Password", parameters);
     }
 
-    protected override async Task OnParametersSetAsync() => userModel = await GetUserModelAsync();
+    protected override async Task OnInitializedAsync() => userModel = await GetUserModelAsync();
 
     private async Task<UserModel> GetUserModelAsync()
     {
